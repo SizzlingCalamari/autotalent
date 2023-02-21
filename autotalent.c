@@ -923,9 +923,12 @@ runAutotalent(LADSPA_Handle Instance,
       else {
         tf2 = tf * tf2 / fSmooth;
       }
-      if (tf2 < -0.5) tf2 = -0.5;
-      if (tf2 > 0.5) tf2 = 0.5;
-      tf2 = 0.5 * sin(PI * tf2) + 0.5; // jumping between notes using horizontally-scaled sine segment
+      if (tf2 < -0.5)
+          tf2 = 0.0f; // tf2 = -0.5, tf2 = 0.5 * sin(PI * -0.5) + 0.5;
+      else if (tf2 > 0.5)
+          tf2 = 1.0f; // tf2 = 0.5, tf2 = 0.5 * sin(PI * 0.5) + 0.5;
+      else
+          tf2 = 0.5 * sin(PI * tf2) + 0.5; // jumping between notes using horizontally-scaled sine segment
       tf2 = tf2 + ti;
       if ((tf < 0.5 && lowersnap) || (tf >= 0.5 && uppersnap)) {
         outpitch = fAmount * tf2 + ((float)1 - fAmount) * outpitch;

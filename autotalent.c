@@ -294,7 +294,43 @@ instantiateAutotalent(const LADSPA_Descriptor* Descriptor,
 
   Autotalent* membvars = malloc(sizeof(Autotalent));
 
+  membvars->m_pfTune = NULL;
+  membvars->m_pfFixed = NULL;
+  membvars->m_pfPull = NULL;
+  membvars->m_pfA = NULL;
+  membvars->m_pfBb = NULL;
+  membvars->m_pfB = NULL;
+  membvars->m_pfC = NULL;
+  membvars->m_pfDb = NULL;
+  membvars->m_pfD = NULL;
+  membvars->m_pfEb = NULL;
+  membvars->m_pfE = NULL;
+  membvars->m_pfF = NULL;
+  membvars->m_pfGb = NULL;
+  membvars->m_pfG = NULL;
+  membvars->m_pfAb = NULL;
+  membvars->m_pfAmount = NULL;
+  membvars->m_pfSmooth = NULL;
+  membvars->m_pfShift = NULL;
+  membvars->m_pfScwarp = NULL;
+  membvars->m_pfLfoamp = NULL;
+  membvars->m_pfLforate = NULL;
+  membvars->m_pfLfoshape = NULL;
+  membvars->m_pfLfosymm = NULL;
+  membvars->m_pfLfoquant = NULL;
+  membvars->m_pfFcorr = NULL;
+  membvars->m_pfFwarp = NULL;
+  membvars->m_pfMix = NULL;
+  membvars->m_pfPitch = NULL;
+  membvars->m_pfConf = NULL;
+  membvars->m_pfInputBuffer1 = NULL;
+  membvars->m_pfOutputBuffer1 = NULL;
+  membvars->m_pfLatency = NULL;
+
   membvars->aref = 440;
+  membvars->inpitch = 0.0f;
+  membvars->conf = 0.0f;
+  membvars->outpitch = 0.0f;
 
   membvars->fs = SampleRate;
 
@@ -400,6 +436,7 @@ instantiateAutotalent(const LADSPA_Descriptor* Descriptor,
   // Pitch shifter initialization
   membvars->phprdd = 0.01; // Default period
   membvars->inphinc = (float)1 / (membvars->phprdd * SampleRate);
+  membvars->outphinc = 0.0;
   membvars->phincfact = 1;
   membvars->phasein = 0;
   membvars->phaseout = 0;
